@@ -12,16 +12,7 @@ permissions:
 
 jobs:
   build:
-    name: Build ${{ matrix.arch }}
     runs-on: ubuntu-latest
-
-    strategy:
-      matrix:
-        include:
-          - arch: amd64
-            platform: linux/amd64
-          - arch: aarch64
-            platform: linux/arm64
 
     steps:
       - name: Checkout
@@ -40,18 +31,16 @@ jobs:
           username: ${{ github.actor }}
           password: ${{ secrets.GITHUB_TOKEN }}
 
-      - name: Build and push
+      - name: Build and push multi-arch image
         uses: docker/build-push-action@v6
         with:
           context: ./cisco-vision-snmp2mqtt
-          platforms: ${{ matrix.platform }}
+          platforms: linux/amd64,linux/arm64
           push: true
           tags: |
-            ghcr.io/zemerdon/cisco-vision-snmp2mqtt-addon:${{ matrix.arch }}-0.5.0-alpha1
             ghcr.io/zemerdon/cisco-vision-snmp2mqtt-addon:0.5.0-alpha1
+            ghcr.io/zemerdon/cisco-vision-snmp2mqtt-addon:latest
           build-args: |
-            BUILD_FROM=ghcr.io/home-assistant/${{ matrix.arch }}-base:latest
-            BUILD_ARCH=${{ matrix.arch }}
             BUILD_VERSION=0.5.0-alpha1
             BUILD_NAME=Cisco Vision SNMP2MQTT
             BUILD_DESCRIPTION=Cisco Vision SNMP to MQTT bridge for Home Assistant
