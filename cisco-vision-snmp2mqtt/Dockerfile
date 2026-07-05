@@ -15,14 +15,15 @@ WORKDIR /app
 
 # Clone
 ARG SOURCE_REPO=zemerdon
-RUN \
-  git clone --branch main --single-branch https://github.com/zemerdon/cisco-vision-snmp2mqtt.git /tmp/snmp2mqtt \
-  && mkdir -p /app/src \
-  && cd /tmp/snmp2mqtt \
-  && cp package.json /app \
-  && cp yarn.lock /app \
-  && cp tsconfig.json /app \
-  && cp src/* /app/src
+ARG CACHE_BUST=stable-object-id-1
+
+RUN echo "Cache bust: ${CACHE_BUST}" \
+ && git clone --branch main --single-branch https://github.com/${SOURCE_REPO}/cisco-vision-snmp2mqtt.git /tmp/snmp2mqtt \
+ && mkdir -p /app/src \
+ && cp /tmp/snmp2mqtt/package.json /app \
+ && cp /tmp/snmp2mqtt/yarn.lock /app \
+ && cp /tmp/snmp2mqtt/tsconfig.json /app \
+ && cp -r /tmp/snmp2mqtt/src/* /app/src
 
 # Build
 RUN yarn install --frozen-lockfile
