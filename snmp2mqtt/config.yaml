@@ -1,15 +1,15 @@
 ---
-name: SNMP2MQTT
-version: 2026.6.1
-slug: snmp2mqtt
-description: SNMP2MQTT expose SNMP sensors to MQTT
-url: https://github.com/andrewjswan/snmp2mqtt-addon/
+name: Cisco Vision SNMP2MQTT
+version: 0.5.0-alpha1
+slug: cisco_vision_snmp2mqtt
+description: Cisco Vision SNMP to MQTT bridge for Home Assistant
+url: https://github.com/zemerdon/cisco-vision-snmp2mqtt
 
 arch:
   - amd64
   - aarch64
 
-image: ghcr.io/andrewjswan/snmp2mqtt-addon
+image: ghcr.io/zemerdon/cisco-vision-snmp2mqtt-addon
 
 startup: application
 boot: auto
@@ -25,17 +25,17 @@ map:
 services:
   - mqtt:need
 
-homeassistant: 2024.1.0
+homeassistant: 2026.7.1
 
 panel_icon: mdi:cog-transfer-outline
-panel_title: SMTP2MQTT
+panel_title: Cisco Vision
 
 options:
   mqtt:
     host: "localhost"
     port: 1883
 
-  targets_path: "/config/addons_config/snmp2mqtt/targets.yaml"
+  targets_path: "/config/addons_config/cisco_vision_snmp2mqtt/targets.yaml"
 
   homeassistant:
     discovery: false
