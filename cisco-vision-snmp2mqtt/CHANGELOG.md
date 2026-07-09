@@ -1,5 +1,13 @@
 # Changelog
 
+## 0.6.1 - 2026-07-09
+
+- Add Cisco Vision Discovery generated YAML import-prep.
+- Add explicit `use_cisco_vision_generated_yaml` option, disabled by default.
+- Validate generated YAML before import: Cisco Vision header, Discovery source header, `targets:` block, target hosts, and no `CHANGE_ME` placeholders.
+- Back up existing targets config before import when enabled.
+- Copy validated generated YAML to the add-on config area and run SNMP2MQTT from that imported targets file.
+
 ## 2026.6.1 - 2026-06-30
 
 - Add `state_class` option for sensors

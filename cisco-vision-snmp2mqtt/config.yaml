@@ -1,8 +1,8 @@
 ---
 name: Cisco Vision SNMP2MQTT
-version: 0.5.0-alpha1
+version: 0.6.1
 slug: cisco_vision_snmp2mqtt
-description: Cisco Vision SNMP to MQTT bridge for Home Assistant
+description: Cisco Vision SNMP to MQTT bridge with Discovery generated YAML import support
 url: https://github.com/zemerdon/cisco-vision-snmp2mqtt
 
 arch:
@@ -37,6 +37,11 @@ options:
 
   targets_path: "/config/addons_config/cisco_vision_snmp2mqtt/targets.yaml"
 
+  use_cisco_vision_generated_yaml: false
+  cisco_vision_generated_yaml_path: "/share/cisco_vision/generated-snmp2mqtt.yaml"
+  imported_targets_path: "/config/addons_config/cisco_vision_snmp2mqtt/imported/generated-snmp2mqtt.yaml"
+  backup_existing_config: true
+
   homeassistant:
     discovery: false
     prefix: "homeassistant"
@@ -60,6 +65,11 @@ schema:
     reject_unauthorized: bool?
 
   targets_path: str
+
+  use_cisco_vision_generated_yaml: bool
+  cisco_vision_generated_yaml_path: str
+  imported_targets_path: str
+  backup_existing_config: bool
 
   homeassistant:
     discovery: bool?
